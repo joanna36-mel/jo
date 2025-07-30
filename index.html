@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Persentase Pelajar</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-6">
+
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+
+        <div class="text-center mb-8">
+
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">📊 Dashboard Persentase Pelajar</h1>
+
+            <p class="text-gray-600">Analisis data akademik siswa tahun 2024</p>
+
+        </div>
+
+        <!-- Stats Cards -->
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+
+                <div class="flex items-center">
+
+                    <div class="text-3xl mr-4">👨‍🎓</div>
+
+                    <div>
+
+                        <p class="text-sm text-gray-600">Total Pelajar</p>
+
+                        <p class="text-2xl font-bold text-gray-800">1,250</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+
+                <div class="flex items-center">
+
+                    <div class="text-3xl mr-4">✅</div>
+
+                    <div>
+
+                        <p class="text-sm text-gray-600">Lulus</p>
+
+                        <p class="text-2xl font-bold text-green-600">85.6%</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500">
+
+                <div class="flex items-center">
+
+                    <div class="text-3xl mr-4">⚠️</div>
+
+                    <div>
+
+                        <p class="text-sm text-gray-600">Remedial</p>
+
+                        <p class="text-2xl font-bold text-yellow-600">10.4%</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-red-500">
+
+                <div class="flex items-center">
+
+                    <div class="text-3xl mr-4">❌</div>
+
+                    <div>
+
+                        <p class="text-sm text-gray-600">Tidak Lulus</p>
+
+                        <p class="text-2xl font-bold text-red-600">4.0%</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Table Section -->
+
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+
+                📋 Tabel Persentase Berdasarkan Kelas
+
+            </h2>
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full table-auto">
+
+                    <thead>
+
+                        <tr class="bg-gray-50">
+
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
+
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Siswa</th>
+
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lulus (%)</th>
+
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Remedial (%)</th>
+
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tidak Lulus (%)</th>
+
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody class="bg-white divide-y divide-gray-200">
+
+                        <tr class="hover:bg-gray-50">
+
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Kelas 10A</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">32</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-green-600 font-semibold">87.5%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-yellow-600 font-semibold">9.4%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-red-600 font-semibold">3.1%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Baik</span></td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-50">
+
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Kelas 10B</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">30</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-green-600 font-semibold">83.3%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-yellow-600 font-semibold">13.3%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-red-600 font-semibold">3.4%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Baik</span></td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-50">
+
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Kelas 11A</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">28</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-green-600 font-semibold">89.3%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-yellow-600 font-semibold">7.1%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-red-600 font-semibold">3.6%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Sangat Baik</span></td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-50">
+
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Kelas 11B</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">31</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-green-600 font-semibold">80.6%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-yellow-600 font-semibold">12.9%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-red-600 font-semibold">6.5%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Cukup</span></td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-50">
+
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Kelas 12A</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">29</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-green-600 font-semibold">93.1%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-yellow-600 font-semibold">6.9%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="text-red-600 font-semibold">0%</span></td>
+
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Sangat Baik</span></td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- Charts Section -->
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+            <!-- Pie Chart -->
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+
+                    🥧 Distribusi Status Kelulusan
+
+                </h2>
+
+                <div class="relative h-80">
+
+                    <canvas id="pieChart"></canvas>
+
+                </div>
+
+            </div>
+
+            <!-- Bar Chart -->
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+
+                    📊 Persentase Kelulusan per Kelas
+
+                </h2>
+
+                <div class="relative h-80">
+
+                    <canvas id="barChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Line Chart -->
+
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+
+                📈 Tren Persentase Kelulusan (6 Bulan Terakhir)
+
+            </h2>
+
+            <div class="relative h-80">
+
+                <canvas id="lineChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- Progress Bars -->
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+
+                🎯 Target vs Pencapaian
+
+            </h2>
+
+            <div class="space-y-6">
+
+                <div>
+
+                    <div class="flex justify-between mb-2">
+
+                        <span class="text-sm font-medium text-gray-700">Tingkat Kelulusan</span>
+
+                        <span class="text-sm text-gray-500">85.6% / 90% (Target)</span>
+
+                    </div>
+
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+
+                        <div class="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-1000" style="width: 85.6%"></div>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div class="flex justify-between mb-2">
+
+                        <span class="text-sm font-medium text-gray-700">Partisipasi Ujian</span>
+
+                        <span class="text-sm text-gray-500">96.8% / 95% (Target)</span>
+
+                    </div>
+
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+
+                        <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-3 rounded-full transition-all duration-1000" style="width: 96.8%"></div>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div class="flex justify-between mb-2">
+
+                        <span class="text-sm font-medium text-gray-700">Nilai Rata-rata</span>
+
+                        <span class="text-sm text-gray-500">78.5 / 80 (Target)</span>
+
+                    </div>
+
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+
+                        <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 h-3 rounded-full transition-all duration-1000" style="width: 78.5%"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        // Pie Chart
+
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+
+        new Chart(pieCtx, {
+
+            type: 'pie',
+
+            data: {
+
+                labels: ['Lulus', 'Remedial', 'Tidak Lulus'],
+
+                datasets: [{
+
+                    data: [85.6, 10.4, 4.0],
+
+                    backgroundColor: [
+
+                        '#10B981',
+
+                        '#F59E0B',
+
+                        '#EF4444'
+
+                    ],
+
+                    borderWidth: 2,
+
+                    borderColor: '#ffffff'
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        position: 'bottom',
+
+                        labels: {
+
+                            padding: 20,
+
+                            font: {
+
+                                size: 12
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+        // Bar Chart
+
+        const barCtx = document.getElementById('barChart').getContext('2d');
+
+        new Chart(barCtx, {
+
+            type: 'bar',
+
+            data: {
+
+                labels: ['Kelas 10A', 'Kelas 10B', 'Kelas 11A', 'Kelas 11B', 'Kelas 12A'],
+
+                datasets: [{
+
+                    label: 'Persentase Lulus',
+
+                    data: [87.5, 83.3, 89.3, 80.6, 93.1],
+
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+
+                    borderColor: 'rgba(16, 185, 129, 1)',
+
+                    borderWidth: 2,
+
+                    borderRadius: 4
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        max: 100,
+
+                        ticks: {
+
+                            callback: function(value) {
+
+                                return value + '%';
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                plugins: {
+
+                    legend: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        });
+
+        // Line Chart
+
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+        new Chart(lineCtx, {
+
+            type: 'line',
+
+            data: {
+
+                labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'],
+
+                datasets: [{
+
+                    label: 'Tingkat Kelulusan (%)',
+
+                    data: [82.1, 84.3, 83.7, 85.2, 86.1, 85.6],
+
+                    borderColor: 'rgba(59, 130, 246, 1)',
+
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+
+                    borderWidth: 3,
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+
+                    pointBorderColor: '#ffffff',
+
+                    pointBorderWidth: 2,
+
+                    pointRadius: 6
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: false,
+
+                        min: 80,
+
+                        max: 90,
+
+                        ticks: {
+
+                            callback: function(value) {
+
+                                return value + '%';
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                plugins: {
+
+                    legend: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        });
+
+        // Add animation to progress bars on page load
+
+        window.addEventListener('load', function() {
+
+            const progressBars = document.querySelectorAll('.bg-gradient-to-r');
+
+            progressBars.forEach(bar => {
+
+                const width = bar.style.width;
+
+                bar.style.width = '0%';
+
+                setTimeout(() => {
+
+                    bar.style.width = width;
+
+                }, 500);
+
+            });
+
+        });
+
+    </script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9670e080a3e6a84d',t:'MTc1MzgzNjc4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>
+<!-- partial -->
+  
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day Slideshow</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Dancing+Script:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    @keyframes pulse-heart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100%) rotate(360deg); opacity: 0; }
+    }
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideOut {
+      0% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 0; transform: translateX(-50px); }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    .pulse-heart { animation: pulse-heart 1.5s ease-in-out infinite; }
+    .sparkle { animation: sparkle 2s ease-in-out infinite; }
+    .slide-in { animation: slideIn 0.6s ease-out; }
+    .slide-out { animation: slideOut 0.6s ease-out; }
+    .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .heart-particle {
+      position: absolute;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+    .photo-frame {
+      border: 6px solid #fff;
+      box-shadow: 0 0 0 3px #c2185b, 0 8px 20px rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f8bbd9 0%, #f48fb1 100%);
+      width: 200px;
+      height: 260px;
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-message {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3), transparent);
+      color: white;
+      padding: 12px 8px 10px 8px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-family: 'Dancing Script', cursive;
+      line-height: 1.3;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .card-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .card-shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    button {
+      cursor: pointer;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 p-0 overflow-hidden">
+  <div id="app" class="h-full w-full relative select-none overflow-hidden" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 50%, #f48fb1 100%);"><!-- Floating hearts background -->
+   <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute top-10 left-10 text-4xl float-animation" style="animation-delay: 0s;">
+     💕
+    </div>
+    <div class="absolute top-20 right-20 text-3xl float-animation" style="animation-delay: 0.5s;">
+     💗
+    </div>
+    <div class="absolute bottom-32 left-20 text-2xl float-animation" style="animation-delay: 1s;">
+     💖
+    </div>
+    <div class="absolute bottom-20 right-32 text-4xl float-animation" style="animation-delay: 1.5s;">
+     💝
+    </div>
+    <div class="absolute top-1/3 left-1/4 text-2xl float-animation" style="animation-delay: 2s;">
+     ✨
+    </div>
+    <div class="absolute top-1/4 right-1/3 text-xl float-animation" style="animation-delay: 0.3s;">
+     💫
+    </div>
+   </div><!-- Sparkles -->
+   <div class="absolute top-16 left-1/4 text-yellow-300 text-2xl sparkle" style="animation-delay: 0s;">
+    ✦
+   </div>
+   <div class="absolute top-1/3 right-1/4 text-pink-300 text-xl sparkle" style="animation-delay: 0.7s;">
+    ✦
+   </div>
+   <div class="absolute bottom-1/4 left-1/3 text-red-300 text-2xl sparkle" style="animation-delay: 1.4s;">
+    ✦
+   </div><!-- Main content container -->
+   <div class="h-full w-full flex flex-col items-center justify-center p-8 relative z-10 overflow-y-auto"><!-- Slide 1: Postcard Style -->
+    <div id="slide1" class="slide-in text-center w-full py-8 flex items-center justify-center">
+     <div class="relative w-full max-w-5xl card-shine" style="background: linear-gradient(to right, #fff 50%, #fce4ec 50%); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); overflow: hidden; min-height: 400px;"><!-- Left side - Image/Design area -->
+      <div class="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-br from-pink-100 via-pink-50 to-white flex flex-col items-center justify-center p-8 pointer-events-none"><!-- Decorative elements -->
+       <div class="flex justify-center gap-2 mb-4" style="animation: fadeInUp 0.8s ease-out;"><span class="text-3xl float-animation" style="animation-delay: 0s;">💕</span> <span class="text-3xl float-animation" style="animation-delay: 0.2s;">💗</span> <span class="text-3xl float-animation" style="animation-delay: 0.4s;">💕</span>
+       </div><!-- Large heart -->
+       <div class="text-8xl pulse-heart mb-4" style="animation: fadeInUp 1s ease-out 0.1s backwards;">
+        💘
+       </div><!-- Decorative flowers -->
+       <div class="flex justify-center gap-3"><span class="text-2xl float-animation" style="animation-delay: 1s;">🌹</span> <span class="text-2xl float-animation" style="animation-delay: 1.2s;">🌷</span> <span class="text-2xl float-animation" style="animation-delay: 1.4s;">🌹</span>
+       </div>
+      </div><!-- Right side - Message area -->
+      <div class="relative z-10 w-1/2 ml-auto p-12 h-full flex flex-col justify-center text-left"><!-- Top postcard design element -->
+       <div class="flex justify-end mb-4" style="animation: fadeInUp 0.8s ease-out;">
+        <div class="text-right">
+         <div class="text-xs font-bold" style="color: #880e4f; letter-spacing: 2px;">
+          ✦ POSTCARD ✦
+         </div>
+        </div>
+       </div><!-- Title -->
+       <h1 id="slide1-title" class="text-4xl font-bold mb-6" style="font-family: 'Dancing Script', cursive; color: #880e4f; animation: fadeInUp 1s ease-out 0.2s backwards; line-height: 1.3;">Happy Valentine's Day</h1><!-- Divider -->
+       <div class="w-16 h-1 bg-gradient-to-r from-pink-400 to-pink-600 mb-6" style="animation: fadeInUp 1s ease-out 0.3s backwards;"></div><!-- Message -->
+       <p class="text-base leading-relaxed mb-8" style="font-family: 'Playfair Display', serif; color: #ad1457; animation: fadeInUp 1s ease-out 0.4s backwards;">A celebration of our love. Every moment with you is precious.</p><!-- Signature line -->
+       <div class="border-t border-pink-300 pt-4 mb-6" style="animation: fadeInUp 1s ease-out 0.5s backwards;">
+        <p class="text-sm italic" style="font-family: 'Dancing Script', cursive; color: #c2185b;">With all my love,</p>
+        <p class="text-lg font-bold" style="color: #880e4f; font-family: 'Dancing Script', cursive;">Your Valentine 💕</p>
+       </div><!-- CTA Button --> <button id="startBtn" class="w-full px-6 py-3 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-full shadow-lg transform hover:scale-105 transition-all" style="font-family: 'Dancing Script', cursive; font-size: 1rem; animation: fadeInUp 1s ease-out 0.6s backwards; z-index: 20; position: relative;"> Begin The Journey 💕 </button>
+      </div><!-- Postcard stamp design (top right corner) -->
+      <div class="absolute top-4 right-4 z-20 w-16 h-20 border-2 border-dashed border-pink-400 flex items-center justify-center pointer-events-none" style="background: linear-gradient(45deg, #fce4ec 25%, transparent 25%, transparent 75%, #fce4ec 75%, #fce4ec); background-size: 8px 8px; animation: fadeInUp 1s ease-out 0.7s backwards;"><span class="text-3xl">💝</span>
+      </div>
+     </div>
+    </div><!-- Slide 2: Our Memories -->
+    <div id="slide2" class="slide-in hidden text-center w-full py-8">
+     <h2 class="text-4xl mb-6 font-bold" style="font-family: 'Dancing Script', cursive; color: #880e4f;">Our Beautiful Memories</h2>
+     <div class="flex flex-row gap-4 items-center justify-center mb-6">
+      <div class="photo-frame"><img id="photo2-1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EPhoto 1%3C/text%3E%3C/svg%3E" alt="Memory 1" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        First moment I knew ✨
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo2-2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EPhoto 2%3C/text%3E%3C/svg%3E" alt="Memory 2" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Captured in time 💕
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo2-3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EPhoto 3%3C/text%3E%3C/svg%3E" alt="Memory 3" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Forever grateful 🌹
+       </div>
+      </div>
+     </div>
+     <p class="text-lg" style="font-family: 'Dancing Script', cursive; color: #c2185b;">Every moment with you is precious 💕</p>
+    </div><!-- Slide 3: Reasons I Love You -->
+    <div id="slide3" class="slide-in hidden text-center w-full py-8">
+     <h2 class="text-4xl mb-6 font-bold" style="font-family: 'Dancing Script', cursive; color: #880e4f;">Why I Love You</h2>
+     <div class="flex flex-row gap-4 items-center justify-center mb-6">
+      <div class="photo-frame"><img id="photo3-1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f48fb1' width='220' height='300'/%3E%3Ctext x='50%' y='30%' text-anchor='middle' font-family='Arial' font-size='50'%3E😊%3C/text%3E%3Ctext x='50%' y='75%' text-anchor='middle' font-family='Arial' font-size='14' fill='%23880e4f'%3EYour Smile%3C/text%3E%3C/svg%3E" alt="Your smile" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f48fb1, %23f8bbd9)';">
+       <div class="photo-message">
+        Lights up my world 🌟
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo3-2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f48fb1' width='220' height='300'/%3E%3Ctext x='50%' y='30%' text-anchor='middle' font-family='Arial' font-size='50'%3E💪%3C/text%3E%3Ctext x='50%' y='75%' text-anchor='middle' font-family='Arial' font-size='14' fill='%23880e4f'%3EYour Strength%3C/text%3E%3C/svg%3E" alt="Your strength" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f48fb1, %23f8bbd9)';">
+       <div class="photo-message">
+        Inspires me daily 💪
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo3-3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f48fb1' width='220' height='300'/%3E%3Ctext x='50%' y='30%' text-anchor='middle' font-family='Arial' font-size='50'%3E💖%3C/text%3E%3Ctext x='50%' y='75%' text-anchor='middle' font-family='Arial' font-size='14' fill='%23880e4f'%3EYour Heart%3C/text%3E%3C/svg%3E" alt="Your heart" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f48fb1, %23f8bbd9)';">
+       <div class="photo-message">
+        Pure and true 💝
+       </div>
+      </div>
+     </div>
+     <p class="text-lg" style="font-family: 'Dancing Script', cursive; color: #c2185b;">A thousand reasons wouldn't be enough ✨</p>
+    </div><!-- Slide 4: Best Moments -->
+    <div id="slide4" class="slide-in hidden text-center w-full py-8">
+     <h2 class="text-4xl mb-6 font-bold" style="font-family: 'Dancing Script', cursive; color: #880e4f;">Our Best Moments Together</h2>
+     <div class="flex flex-row gap-4 items-center justify-center mb-6">
+      <div class="photo-frame"><img id="photo4-1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EMemory 1%3C/text%3E%3C/svg%3E" alt="Moment 1" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Dancing in the rain 🌧️
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo4-2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EMemory 2%3C/text%3E%3C/svg%3E" alt="Moment 2" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Sunset together 🌅
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo4-3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EMemory 3%3C/text%3E%3C/svg%3E" alt="Moment 3" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Laughing endlessly 😄
+       </div>
+      </div>
+     </div>
+     <p class="text-lg" style="font-family: 'Dancing Script', cursive; color: #c2185b;">These moments make my heart complete 🌹</p>
+    </div><!-- Slide 5: Thank You Message -->
+    <div id="slide5" class="slide-in hidden text-center w-full py-8 flex flex-col items-center justify-center">
+     <div class="max-w-2xl space-y-8">
+      <h2 class="text-5xl font-bold" style="font-family: 'Dancing Script', cursive; color: #880e4f;">Thank You 💕</h2>
+      <p id="slide5-message" class="text-2xl leading-relaxed" style="font-family: 'Playfair Display', serif; color: #ad1457;">Thank you for being my partner in life. For the laughter, the love, and all the beautiful moments we share. You make every day brighter, and I'm so grateful for you. Forever grateful, forever yours.</p>
+      <div class="text-6xl pulse-heart">
+       💗
+      </div>
+     </div>
+    </div><!-- Slide 6: Our Love Story -->
+    <div id="slide6" class="slide-in hidden text-center w-full py-8">
+     <h2 class="text-4xl mb-6 font-bold" style="font-family: 'Dancing Script', cursive; color: #880e4f;">Our Love Story</h2>
+     <div class="flex flex-row gap-4 items-center justify-center mb-8">
+      <div class="photo-frame"><img id="photo6-1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EOur Story%3C/text%3E%3C/svg%3E" alt="Story 1" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Chapter One 📖
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo6-2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EOur Story%3C/text%3E%3C/svg%3E" alt="Story 2" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Still writing... 📝
+       </div>
+      </div>
+      <div class="photo-frame"><img id="photo6-3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='%23f8bbd9' width='220' height='300'/%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23880e4f'%3EOur Story%3C/text%3E%3C/svg%3E" alt="Story 3" loading="lazy" onerror="console.error('Photo failed:', this.src); this.style.background='linear-gradient(135deg, %23f8bbd9, %23f48fb1)';">
+       <div class="photo-message">
+        Happily ever after 🎬
+       </div>
+      </div>
+     </div>
+     <div class="space-y-6">
+      <h1 class="text-5xl font-bold" style="font-family: 'Dancing Script', cursive; color: #880e4f; text-shadow: 3px 3px 6px rgba(255,255,255,0.7);">I Love You</h1>
+      <div class="text-6xl pulse-heart">
+       💘
+      </div>
+      <p class="text-2xl" style="font-family: 'Dancing Script', cursive; color: #c2185b;">Forever &amp; Always 💕</p>
+      <p class="text-sm" style="font-family: 'Playfair Display', serif; color: #ad1457;">🔄 Click to start over | ❤️ Use arrow keys to navigate</p>
+     </div>
+    </div><!-- Navigation buttons -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 z-30 pointer-events-auto"><button id="prevBtn" class="bg-white/70 hover:bg-white/90 px-6 py-3 rounded-full font-bold transition-all" style="color: #c2185b; position: relative; z-index: 30;"> ← Back </button> <button id="nextBtn" class="bg-white/70 hover:bg-white/90 px-6 py-3 rounded-full font-bold transition-all" style="color: #c2185b; position: relative; z-index: 30;"> Next → </button>
+    </div><!-- Slide counter -->
+    <div class="absolute top-8 right-8 bg-white/70 rounded-full px-6 py-2 z-30" style="font-family: 'Dancing Script', cursive; color: #c2185b; font-size: 1.1rem;"><span id="slideCounter">1</span> / 6
+    </div>
+   </div><!-- Heart particles container -->
+   <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+  </div>
+  <script>
+    const defaultConfig = {
+      slide_title: "Happy Valentine's Day",
+      recipient_name: "My Love",
+      custom_message: "Thank you for being my partner in life. For the laughter, the love, and all the beautiful moments we share. You make every day brighter, and I'm so grateful for you. Forever grateful, forever yours.",
+      photo_url_2_1: "",
+      photo_url_2_2: "",
+      photo_url_2_3: "",
+      photo_url_3_1: "",
+      photo_url_3_2: "",
+      photo_url_3_3: "",
+      photo_url_4_1: "",
+      photo_url_4_2: "",
+      photo_url_4_3: "",
+      photo_url_6_1: "",
+      photo_url_6_2: "",
+      photo_url_6_3: "",
+      background_color: "#fce4ec",
+      primary_color: "#880e4f",
+      secondary_color: "#c2185b",
+      accent_color: "#f48fb1",
+      text_color: "#ad1457"
+    };
+
+    let currentSlide = 1;
+    const totalSlides = 6;
+
+    function createHeartParticle(x, y) {
+      const particles = document.getElementById('particles');
+      const hearts = ['❤️', '💕', '💗', '💖', '💝', '💓', '💞', '✨', '💫'];
+      const heart = document.createElement('div');
+      heart.className = 'heart-particle text-2xl';
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = x + 'px';
+      heart.style.top = y + 'px';
+      heart.style.animationDuration = (Math.random() * 2 + 1) + 's';
+      particles.appendChild(heart);
+      setTimeout(() => heart.remove(), 3000);
+    }
+
+    function createBurstParticles(x, y, count = 12) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          const offsetX = x + (Math.random() - 0.5) * 200;
+          const offsetY = y + (Math.random() - 0.5) * 100;
+          createHeartParticle(offsetX, offsetY);
+        }, i * 50);
+      }
+    }
+
+    function showSlide(slideNum) {
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById('slide' + i);
+        if (i === slideNum) {
+          slide.classList.remove('hidden', 'slide-out');
+          slide.classList.add('slide-in');
+        } else {
+          slide.classList.add('hidden', 'slide-out');
+          slide.classList.remove('slide-in');
+        }
+      }
+      document.getElementById('slideCounter').textContent = slideNum;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        showSlide(currentSlide);
+      } else {
+        currentSlide = 1;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        showSlide(currentSlide);
+      } else {
+        currentSlide = totalSlides;
+        showSlide(currentSlide);
+      }
+    }
+
+    async function onConfigChange(config) {
+      const slide1Title = document.getElementById('slide1-title');
+      const slide5Message = document.getElementById('slide5-message');
+
+      if (slide1Title) {
+        slide1Title.textContent = config.slide_title || defaultConfig.slide_title;
+      }
+
+      if (slide5Message) {
+        slide5Message.textContent = config.custom_message || defaultConfig.custom_message;
+      }
+
+      // Update all photo URLs
+      for (let slide = 2; slide <= 4; slide++) {
+        for (let photo = 1; photo <= 3; photo++) {
+          const photoId = `photo${slide}-${photo}`;
+          const configKey = `photo_url_${slide}_${photo}`;
+          const photoElement = document.getElementById(photoId);
+          
+          if (photoElement && config[configKey]) {
+            photoElement.src = config[configKey];
+          }
+        }
+      }
+
+      for (let photo = 1; photo <= 3; photo++) {
+        const photoId = `photo6-${photo}`;
+        const configKey = `photo_url_6_${photo}`;
+        const photoElement = document.getElementById(photoId);
+        
+        if (photoElement && config[configKey]) {
+          photoElement.src = config[configKey];
+        }
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => { config.secondary_color = value; window.elementSdk.setConfig({ secondary_color: value }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["slide_title", config.slide_title || defaultConfig.slide_title],
+        ["recipient_name", config.recipient_name || defaultConfig.recipient_name],
+        ["custom_message", config.custom_message || defaultConfig.custom_message],
+        ["photo_url_2_1", config.photo_url_2_1 || defaultConfig.photo_url_2_1],
+        ["photo_url_2_2", config.photo_url_2_2 || defaultConfig.photo_url_2_2],
+        ["photo_url_2_3", config.photo_url_2_3 || defaultConfig.photo_url_2_3],
+        ["photo_url_3_1", config.photo_url_3_1 || defaultConfig.photo_url_3_1],
+        ["photo_url_3_2", config.photo_url_3_2 || defaultConfig.photo_url_3_2],
+        ["photo_url_3_3", config.photo_url_3_3 || defaultConfig.photo_url_3_3],
+        ["photo_url_4_1", config.photo_url_4_1 || defaultConfig.photo_url_4_1],
+        ["photo_url_4_2", config.photo_url_4_2 || defaultConfig.photo_url_4_2],
+        ["photo_url_4_3", config.photo_url_4_3 || defaultConfig.photo_url_4_3],
+        ["photo_url_6_1", config.photo_url_6_1 || defaultConfig.photo_url_6_1],
+        ["photo_url_6_2", config.photo_url_6_2 || defaultConfig.photo_url_6_2],
+        ["photo_url_6_3", config.photo_url_6_3 || defaultConfig.photo_url_6_3]
+      ]);
+    }
+
+    // Event listeners
+    document.getElementById('startBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      createBurstParticles(e.clientX, e.clientY, 12);
+      nextSlide();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      createBurstParticles(e.clientX, e.clientY, 8);
+      nextSlide();
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      createBurstParticles(e.clientX, e.clientY, 8);
+      prevSlide();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Click anywhere to advance (except on slide 1 and buttons)
+    document.getElementById('app').addEventListener('click', (e) => {
+      if (currentSlide === 1) return;
+      if (e.target.closest('button')) return;
+      createBurstParticles(e.clientX, e.clientY, 6);
+      nextSlide();
+    });
+
+    // Initialize
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    showSlide(1);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cd3d4c5a163e628',t:'MTc3MDk4MDUyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
